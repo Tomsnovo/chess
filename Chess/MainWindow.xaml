@@ -23,6 +23,8 @@
             <RowDefinition Height="23*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
+        <Grid Name="ChessBoardGrid" Grid.Row="3" Grid.Column="1"/>
         <TextBox x:Name="txtbox" Grid.Column="3" IsReadOnly="True" HorizontalAlignment="Center" Height="568" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="134"/>
         <Canvas x:Name="Canvas" Grid.Column="1" HorizontalAlignment="Center" Height="603" Grid.Row="3" VerticalAlignment="Center" Width="535"/>
 

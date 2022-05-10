@@ -6,7 +6,7 @@ namespace Chess
 {
     public class Figure
     {
-        private List<string> numbers = new List<string>() {"1", "2", "3", "4", "5", "6", "7", "8"};
+        private List<string> numbers = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8" };
         private List<string> letters = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H" };
         private string position ="";
 
@@ -61,12 +61,12 @@ namespace Chess
 
     public enum FigureType 
     { 
-        Pawn, //pěšec
-        Rook, //věž
-        Knight, //jezdec
-        Bishop, //střelec
-        Queen, //Dáma
-        King //král
+        Pawn,       //pěšec
+        Rook,       //věž
+        Knight,     //jezdec
+        Bishop,     //střelec
+        Queen,      //Dáma
+        King        //král
     }
     public enum FigureColor
     {
