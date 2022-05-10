@@ -67,6 +67,7 @@ namespace Chess
             {
                 txtbox.Text += figure.ToString() + "\n";
             }
+            DrawBoard();
         }
 
 
@@ -80,13 +81,37 @@ namespace Chess
                 {
                     Width = new GridLength(1, GridUnitType.Star) 
                 });
-            ChessBoardGrid.ColumnDefinitions.Add(
-               new ColumnDefinition()
+            ChessBoardGrid.RowDefinitions.Add(
+               new RowDefinition()
                {
-                   Width = new GridLength(1, GridUnitType.Star)
+                   Height = new GridLength(1, GridUnitType.Star)
                });
                  
             }
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                         Rectangle rectangle = new Rectangle();
+                         rectangle.HorizontalAlignment = HorizontalAlignment.Stretch;
+                         rectangle.VerticalAlignment = VerticalAlignment.Stretch;
+                    if ((x + y) % 2 == 0)
+                    {
+                        rectangle.Fill = new SolidColorBrush(Color.FromRgb(255, 255, 128));
+                    }
+                    else
+                    {
+                        rectangle.Fill = new SolidColorBrush(Color.FromRgb( 0, 50, 0));
+                    }
+                         
+                         Grid.SetColumn(rectangle, x);
+                         Grid.SetRow(rectangle, y);
+                         ChessBoardGrid.Children.Add(rectangle); 
+                         
+                }
+            }
+            //ChessBoardGrid.ShowGridLines = true;
+
         }
 
 
