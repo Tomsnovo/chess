@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,31 +22,32 @@ namespace Chess
     public partial class MainWindow : Window
     {
         
-        Dictionary<int, string> columns = new Dictionary<int, string>();  
-        Dictionary<int, string> rows = new Dictionary<int, string>();
+        Dictionary<string, int> columns = new Dictionary<string, int>();  
+        Dictionary<string, int> rows = new Dictionary<string, int>();
         List<Figure> figures = new List<Figure>();
+
 
 
 
 
         public void CreateDictionaries()
         {
-            columns.Add(0, "A");
-            columns.Add(1, "B");
-            columns.Add(2, "C");
-            columns.Add(3, "D");    
-            columns.Add(4, "E");    
-            columns.Add(5, "F");
-            columns.Add(6, "G");
-            columns.Add(7, "H");
-            rows.Add(0, "8");
-            rows.Add(1, "7");
-            rows.Add(2, "6");
-            rows.Add(3, "5");
-            rows.Add(4, "4");
-            rows.Add(5, "3");
-            rows.Add(6, "2");
-            rows.Add(7, "1");
+            columns.Add("A", 0);
+            columns.Add("B", 1);
+            columns.Add("C", 2);
+            columns.Add("D", 3);    
+            columns.Add("E", 4);    
+            columns.Add("F", 5);
+            columns.Add("G", 6);
+            columns.Add("H", 7);
+            rows.Add("8", 0);
+            rows.Add("7", 1);
+            rows.Add("6", 2);
+            rows.Add("5", 3);
+            rows.Add("4", 4);
+            rows.Add("3", 5);
+            rows.Add("2", 6);
+            rows.Add("1", 7);
         }
 
 
@@ -95,11 +97,43 @@ namespace Chess
                 txtbox.Text += figure.ToString() + "\n";
             }
             DrawBoard();
+            DrawFigures(figures);
+        }
+        private void DrawFigure(Figure figure)
+        {
+            Rectangle rectangle = new Rectangle();
+            rectangle.HorizontalAlignment = HorizontalAlignment.Stretch;
+            rectangle.VerticalAlignment = VerticalAlignment.Stretch;
+            rectangle.Margin = new Thickness(5);
+            rectangle.Fill = new ImageBrush(GetImage(figure.Resource));
+            int indexCol = columns[figure.Position.Substring(0, 1)];
+            int indexRow = rows[figure.Position.Substring(1, 1)];
+
+            Grid.SetColumn(rectangle, indexCol);
+            Grid.SetRow(rectangle, indexRow);
+            ChessBoardGrid.Children.Add(rectangle);
+        }
+
+        private void DrawFigures(List<Figure> figures)
+        {
+            foreach(var figure in figures)
+            {
+                DrawFigure(figure);
+            }
+        }
+
+        private ImageSource GetImage(byte[] resource)
+        {
+            MemoryStream memoryStream = new MemoryStream(resource);
+            BitmapFrame bitmapFrame = BitmapFrame.Create(memoryStream);
+            Image image = new Image();
+            image.Source = bitmapFrame;
+            return image.Source;
         }
 
 
 
-        public void DrawBoard()
+            public void DrawBoard()
         {
             for (int i = 0; i < 8; i++)
             { 
