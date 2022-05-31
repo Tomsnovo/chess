@@ -25,6 +25,7 @@ namespace Chess
         Dictionary<string, int> columns = new Dictionary<string, int>();  
         Dictionary<string, int> rows = new Dictionary<string, int>();
         List<Figure> figures = new List<Figure>();
+        Figure selectedFigure;
 
 
 
@@ -112,6 +113,32 @@ namespace Chess
             Grid.SetColumn(rectangle, indexCol);
             Grid.SetRow(rectangle, indexRow);
             ChessBoardGrid.Children.Add(rectangle);
+            rectangle.Tag = figure;
+            rectangle.MouseDown += Rectangle_MouseDown;
+        }
+
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle rectangle = (Rectangle)sender;
+            Figure figure = (Figure)rectangle.Tag;
+            if (selectedFigure == null)
+            {
+                rectangle.Margin = new Thickness(0);
+                rectangle.Stroke = new SolidColorBrush(Colors.Lime);
+                rectangle.StrokeThickness = 5;
+            }
+            else if (selectedFigure == figure)
+            {
+                rectangle.StrokeThickness = 0;
+                selectedFigure = null;
+            }
+            else
+            {
+
+            }
+            
+            
+            
         }
 
         private void DrawFigures(List<Figure> figures)
@@ -162,11 +189,11 @@ namespace Chess
                    
                     if ((x + y) % 2 == 0)
                     {
-                        rectangle.Fill = new SolidColorBrush(Color.FromRgb(255, 255, 128));
+                        rectangle.Fill = new SolidColorBrush(Color.FromRgb(236, 236, 208));
                     }
                     else
                     {
-                        rectangle.Fill = new SolidColorBrush(Color.FromRgb( 0, 50, 0));
+                        rectangle.Fill = new SolidColorBrush(Color.FromRgb( 119, 149, 87));
                     }
                          
                          Grid.SetColumn(rectangle, x);
