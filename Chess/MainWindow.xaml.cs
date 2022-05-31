@@ -123,6 +123,7 @@ namespace Chess
             Figure figure = (Figure)rectangle.Tag;
             if (selectedFigure == null)
             {
+               selectedFigure = figure;
                 rectangle.Margin = new Thickness(0);
                 rectangle.Stroke = new SolidColorBrush(Colors.Lime);
                 rectangle.StrokeThickness = 5;
@@ -130,6 +131,7 @@ namespace Chess
             else if (selectedFigure == figure)
             {
                 rectangle.StrokeThickness = 0;
+                rectangle.Margin = new Thickness(5);
                 selectedFigure = null;
             }
             else
